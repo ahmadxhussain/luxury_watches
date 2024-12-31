@@ -1,9 +1,15 @@
+import os
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
 
 def scatter_plot_with_name(data):
+    # Get the directory of the running script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # Define the file path dynamically
+    file_path = os.path.join(script_dir, 'scatter_plot.png')
+    
     plt.close('all')  # Close all open figures
     plt.clf()         # Clear the current figure
     
@@ -13,7 +19,7 @@ def scatter_plot_with_name(data):
         y='price',      # y-axis: Price
         hue='brand',    # Color points by Brand
         data=data,
-        palette='tab20',
+        palette='tab20',# Use tab20 palette
         alpha=0.8       # point transparency        
     )
     # Plot Label
@@ -38,5 +44,8 @@ def scatter_plot_with_name(data):
     plt.legend(title='Brand', bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
     plt.show()
-    plt.savefig("scatter_plot.png")  # Save to the project directory
+    plt.savefig(file_path)  # Save dynamically in the script's directory
     plt.close()  # Close the plot to avoid warnings
+
+# Usage
+# scatter_plot_with_name(your_dataframe)
