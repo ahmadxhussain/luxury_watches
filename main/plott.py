@@ -24,7 +24,7 @@ def scatter_plot_with_name(data):
     ax = plt.gca()
     ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f'${x:,.0f}'))
     
-    top_expensive = data.nlargest(10, 'price')  # Select top 10 watches by price
+    top_expensive = data.nlargest(5, 'price')  # Select top 10 watches by price
     for _, row in top_expensive.iterrows():
         plt.text(
             row['yop'], 
