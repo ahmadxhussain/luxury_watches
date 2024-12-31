@@ -31,7 +31,7 @@ def read_and_filter(filename):
         return None
     
 def main():
-    filename = '/workspaces/luxury_watches/main/Watches.csv'
+    filename = '/workspaces/luxury_watches/csv_locators/Watches.csv'
     data = read_and_filter(filename)
     
     print(data)
