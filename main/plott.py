@@ -1,11 +1,12 @@
 
 import seaborn as sns
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 
 
 def scatter_plot_with_name(data):
     
-    plt.figure(figsize=(24, 16))
+    plt.figure(figsize=(12, 8))
     sns.scatterplot(
         x='yop',        # x-axis: Year of Production
         y='price',      # y-axis: Price
@@ -18,19 +19,20 @@ def scatter_plot_with_name(data):
     plt.title('Price vs. Year of Production by Brand')
     plt.xlabel('Year of Production')
     plt.ylabel('Price')
+
     
+    ax = plt.gca()
+    ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f'${x:,.0f}'))
     
-    # Annotate some points with the watch name
-    for _, row in data.iterrows():
-        if row['Price'] > 100000:  # Annotate only watches with high prices
-            plt.text(
-                row['yop'], 
-                row['price'], 
-                row['name'], 
-                fontsize=8, 
-                alpha=0.7
-            )
-    
+    top_expensive = data.nlargest(10, 'price')  # Select top 10 watches by price
+    for _, row in top_expensive.iterrows():
+        plt.text(
+            row['yop'], 
+            row['price'], 
+            row['name'], 
+            fontsize=8, 
+            alpha=0.7
+        )
 
     
     plt.legend(title='Brand', bbox_to_anchor=(1.05, 1), loc='upper left')
