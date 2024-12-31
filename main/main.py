@@ -14,8 +14,9 @@ if __name__ == "__main__":
     #check if data is empty otherwise run scatter plot
     if data is not None:
         print(data.shape[0])
-        print(data.head())
+        #print(data.head())
         scatter_plot_with_name(data)
+        print("Successul plot created")
     else:
         print("Data not read, or not filtered")
         
