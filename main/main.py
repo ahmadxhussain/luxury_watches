@@ -1,43 +1,22 @@
-
-import pandas as pd
+from data_reading import read_and_filter
+from plott import scatter_plot_with_name
 import os
 
-
-#now we will read data.
-
-def read_and_filter(filename):
-    try:
-        
-        read = pd.read_csv(filename)
+if __name__ == "__main__":
+    # Dynamically get the full path to the CSV file
+    base_dir = os.path.dirname(os.path.dirname(__file__))  # Go one level up from 'main'
+    filename = os.path.join(base_dir, 'csv_locators/Watches.csv')
     
-        #ensure first 5 are correct
-        #print(read.head())
-        
-        required_cols = ['brand', 'name', 'yop', 'price']
-    
-        #will filter the first 500 rows by Brand, Name, YOP, and Price
-        filtered_data = read.loc[:499, required_cols]
-        
-        save_path = os.path.join(os.path.dirname(filename), 'filtered_data.csv')
-    
-        filtered_data.to_csv(save_path, index = False)
-
-        #print(filtered_data.head())
-    
-        return filtered_data
-    
-    except Exception as e:
-        print(f"Error: {e}")
-        return None
-    
-def main():
-    filename = '/workspaces/luxury_watches/csv_locators/Watches.csv'
+    #read data
     data = read_and_filter(filename)
     
-    print(data)
-    print(f"Total number of columns: {data.shape[0]}")
     
-#to run main
-if __name__ == "__main__":
-    main()
-    
+    #check if data is empty otherwise run scatter plot
+    if data is not None:
+        print(data.columns)
+        print(data.head())
+        scatter_plot_with_name(data)
+    else:
+        print("Data not read, or not filtered")
+        
+        
