@@ -43,8 +43,8 @@ def scatter_plot_with_name(data):
     
     plt.legend(title='Brand', bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
-    plt.show()
     plt.savefig(file_path)  # Save dynamically in the script's directory
+    plt.show()
     plt.close()  # Close the plot to avoid warnings
 
 # Usage

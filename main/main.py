@@ -1,5 +1,6 @@
 from data_reading import read_and_filter
 from plott import scatter_plot_with_name
+from model import model_regression
 import os
 
 if __name__ == "__main__":
@@ -16,7 +17,9 @@ if __name__ == "__main__":
         print(data.shape[0])
         #print(data.head())
         scatter_plot_with_name(data)
-        print("Successul plot created")
+        print("Successul Scatter Plot created")
+        model_regression()
+        print("Regression Model Created.")
     else:
         print("Data not read, or not filtered")
         

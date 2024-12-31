@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 # Constants
-REQUIRED_COLS = ['brand', 'name', 'yop', 'price']
+REQUIRED_COLS = ['brand', 'name', 'yop', 'price', 'model', 'cond', 'size']
 MAX_PRICE = 1_000_000
 MIN_YEAR = 1900
 
@@ -23,7 +23,7 @@ def read_and_filter(filename):
         read.columns = read.columns.str.strip().str.lower()
     
 
-         # Filter the first 500 rows by required columns
+         #read all data
         filtered_data = read.loc[:, REQUIRED_COLS]
 
         # Clean 'yop' column
@@ -34,9 +34,14 @@ def read_and_filter(filename):
         filtered_data['price'] = filtered_data['price'].str.replace(r'[^\d.]', '', regex=True)  # Remove non-numeric characters
         filtered_data['price'] = filtered_data['price'].replace('', float('nan'))  # Replace empty strings with NaN
         filtered_data['price'] = pd.to_numeric(filtered_data['price'], errors='coerce')  # Convert to float
+        
+        #clean size column
+        filtered_data['size'] = filtered_data['size'].str.extract(r'(\d+)', expand=False)
+        filtered_data['size'] = filtered_data['size'].replace('', float('nan'))  # Replace empty strings with NaN
+        filtered_data['size'] = pd.to_numeric(filtered_data['size'], errors='coerce')  # Convert to float
 
         # Drop rows with missing or invalid values in 'yop' or 'price'
-        filtered_data = filtered_data.dropna(subset=['yop', 'price'])
+        filtered_data = filtered_data.dropna(subset=['yop', 'price', 'cond', 'model'])
         
         #Also filter data for outliers, before 1900 and price < 1,000,000
         filtered_data = filtered_data[
