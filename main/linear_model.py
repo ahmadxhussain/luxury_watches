@@ -55,7 +55,7 @@ def model_regression():
     ax.xaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f'${x:,.0f}'))
 
     # Save the plot dynamically to the same directory as the script
-    plot_path = os.path.join(base_dir, 'main/prediction_plot.png')
+    plot_path = os.path.join(base_dir, 'main/linear_prediction_plot.png')
     plt.savefig(plot_path)
     #print(f"Prediction plot saved to: {plot_path}")
 

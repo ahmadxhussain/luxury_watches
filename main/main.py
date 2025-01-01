@@ -1,6 +1,7 @@
 from data_reading import read_and_filter
 from plott import scatter_plot_with_name
-from model import model_regression
+from linear_model import model_regression
+from random_forest_model import random_forest
 import os
 
 if __name__ == "__main__":
@@ -19,7 +20,9 @@ if __name__ == "__main__":
         scatter_plot_with_name(data)
         print("Successul Scatter Plot created")
         model_regression()
-        print("Regression Model Created.")
+        print("Linear Regression Model Created.")
+        random_forest()
+        print("Random Forest Regression Model Created")
     else:
         print("Data not read, or not filtered")
         
